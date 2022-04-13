@@ -63,6 +63,7 @@ class FormWindow(QWidget):
         self.confirm_button.adjustSize()
         self.confirm_button.clicked.connect(self.on_confirm)
         self.error_message_panel = QLabel()
+        self.error_message_panel.setWordWrap(True)
         self.UI()
 
     def UI(self):

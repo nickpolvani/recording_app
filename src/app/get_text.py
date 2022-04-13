@@ -27,7 +27,7 @@ ENCODINGS = {
 class TextProvider():
     def __init__(self, language:str) -> None:
         self.language = language
-        self.max_words = 30
+        self.max_words = 50
         self.get_sentences()
 
 

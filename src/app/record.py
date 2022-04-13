@@ -4,6 +4,8 @@ import pyaudio
 import wave
 import numpy as np
 
+from app.get_text import ENCODINGS
+
 """
 DEVICE_NAME = "MOTU Audio ASIO"
 CHANNELS = 4
@@ -64,8 +66,9 @@ class Recorder():
         return (in_data, pyaudio.paContinue)
 
 
-    def start_recording(self):
+    def start_recording(self, text_to_read:str):
         self.current_recording += 1
+        self.save_text(text_to_read)
         self.pa = pyaudio.PyAudio()
         self.format = pyaudio.paInt16
         self.fulldata = []
@@ -85,8 +88,14 @@ class Recorder():
             stream_callback=self.callback
         )
         self.stream_in.start_stream()
-        
 
+
+    def save_text(self, text_to_read:str):
+        output_path = os.path.join(self.save_dir, f"{self.current_recording}.txt")
+        out_file = open(output_path, "w", encoding=ENCODINGS[self.participant_info["language"]])
+        out_file.write(text_to_read)
+        out_file.close()
+        
 
     def stop_recording(self):
         self.stream_in.stop_stream()

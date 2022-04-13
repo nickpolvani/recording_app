@@ -20,6 +20,7 @@ class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.restart_recording()
+        self.setGeometry(100, 100, 800, 500)
 
     
     def restart_recording(self):

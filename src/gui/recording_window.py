@@ -26,6 +26,7 @@ class RecordingWidget(QWidget):
 
         self.text_panel = QLabel()
         self.text_panel.setText("Text to read")
+        self.text_panel.setWordWrap(True)
 
         
         self.text_provider = TextProvider(language)
@@ -54,7 +55,7 @@ class RecordingWidget(QWidget):
         self.text_panel.setText(text_to_read)
         self.text_panel.show()
 
-        self.parent().recorder.start_recording()
+        self.parent().recorder.start_recording(text_to_read)
 
 
 
