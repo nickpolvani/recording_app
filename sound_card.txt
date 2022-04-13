@@ -1,0 +1,21 @@
+name MOTU Mic/Line 1-2 (MOTU Audio Wave for 64 bit)
+hostApi 3
+maxInputChannels 2
+maxOutputChannels 0
+defaultLowInputLatency 0.003
+defaultLowOutputLatency 0.0
+defaultHighInputLatency 0.01
+defaultHighOutputLatency 0.0
+defaultSampleRate 44100.0
+
+
+
+name MOTU Audio ASIO
+hostApi 2
+maxInputChannels 8
+maxOutputChannels 8
+defaultLowInputLatency 0.011609977324263039
+defaultLowOutputLatency 0.011609977324263039
+defaultHighInputLatency 0.011609977324263039
+defaultHighOutputLatency 0.011609977324263039
+defaultSampleRate 44100.0

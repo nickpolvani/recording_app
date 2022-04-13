@@ -1,0 +1,7 @@
+recordings
+data_raw
+src/xpGUI
+.vscode
+*.wav
+**/__pycache__
+data 
