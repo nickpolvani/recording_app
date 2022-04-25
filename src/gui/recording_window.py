@@ -10,7 +10,7 @@ class RecordingWidget(QWidget):
     def __init__(self, parent:QWidget, language:str):
         super().__init__(parent)
         self.language = language
-        self.max_recordings = 3
+        self.max_recordings = 30
         self.num_recordings = 0
 
         self.title_label = QLabel()
@@ -29,7 +29,7 @@ class RecordingWidget(QWidget):
         self.text_panel.setWordWrap(True)
 
         
-        self.text_provider = TextProvider(language)
+        self.text_provider = TextProvider(language, num_sentences=self.max_recordings)
         self.UI()
         
 

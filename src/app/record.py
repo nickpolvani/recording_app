@@ -3,16 +3,18 @@ import os
 import pyaudio 
 import wave
 import numpy as np
-
+from scipy.io import wavfile
 from app.get_text import ENCODINGS
 
-"""
+
 DEVICE_NAME = "MOTU Audio ASIO"
 CHANNELS = 4
-"""
 
+"""
 DEVICE_NAME = "Microphone Array (Realtek Audio"
 CHANNELS = 2
+"""
+
 
 def explore_devices(name):
   # establish index of input device for sound card
@@ -104,10 +106,19 @@ class Recorder():
 
 
     def save_recording(self):
-        output_path = os.path.join(self.save_dir, f"{self.current_recording}.wav")
+        output_path = os.path.join(self.save_dir, f"{self.current_recording}_all_channels.wav")
         wav_file = wave.open(output_path, "wb")
         wav_file.setnchannels(self.channels)        # number of channels
         wav_file.setsampwidth(self.pa.get_sample_size(self.format))        # sample width in bytes
         wav_file.setframerate(self.rate) 
         wav_file.writeframes(b''.join(self.fulldata))
         wav_file.close()
+
+        rate, all_channels = wavfile.read(output_path)
+
+        air_demo_path = os.path.join(self.save_dir, f"{self.current_recording}_air_demo.wav")
+        wavfile.write(air_demo_path, rate=rate, data=all_channels[:,0])
+        bone_demo_path = os.path.join(self.save_dir, f"{self.current_recording}_bone_demo.wav")
+        wavfile.write(bone_demo_path, rate=rate, data=all_channels[:,1])
+        air_reference_path = os.path.join(self.save_dir, f"{self.current_recording}_air_reference.wav")
+        wavfile.write(air_reference_path, rate=rate, data=all_channels[:,2])

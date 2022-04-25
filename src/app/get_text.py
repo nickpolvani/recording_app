@@ -25,10 +25,11 @@ ENCODINGS = {
 
 
 class TextProvider():
-    def __init__(self, language:str) -> None:
+    def __init__(self, language:str, num_sentences:int) -> None:
         self.language = language
-        self.max_words = 50
+        self.max_words = 40
         self.get_sentences()
+        self.num_sentences = num_sentences
 
 
     def get_sentences(self):
@@ -40,7 +41,7 @@ class TextProvider():
 
 
     def get_paragraph(self):
-        start_idx = random.randint(0, len(self.sentences) - 4)
+        start_idx = random.randint(0, len(self.sentences) - (self.num_sentences + 1))
         num_words = 0
         out_text = ""
         while num_words < self.max_words or start_idx >= len(self.sentences):
