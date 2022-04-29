@@ -11,7 +11,6 @@ from gui.language_select import LanguageSelectWidget
 from gui.recording_window import RecordingWidget
 from app.record import Recorder
 from gui.form import FormWindow
-from win32api import GetSystemMetrics
 
 
 class MainWindow(QMainWindow):
@@ -89,11 +88,10 @@ class MainWidget(QWidget):
 def main():
 
     a = QApplication(sys.argv)
-    font = QFont("Arial", 14)
+    font = QFont("Arial", 26)
     a.setFont(font)
     w = MainWindow()
-    #w.showMaximized()
-    w.show()
+    w.showMaximized()
     currentExitCode = a.exec_()
 
 

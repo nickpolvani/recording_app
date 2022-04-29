@@ -7,6 +7,8 @@ from scipy.io import wavfile
 from app.get_text import ENCODINGS
 
 
+
+
 DEVICE_NAME = "MOTU Audio ASIO"
 CHANNELS = 4
 
