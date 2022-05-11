@@ -5,3 +5,5 @@ src/xpGUI
 *.wav
 **/__pycache__
 data 
+audio_datasets
+external_recordings
