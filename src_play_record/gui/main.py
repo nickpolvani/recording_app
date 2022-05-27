@@ -29,7 +29,7 @@ class MainWidget(QWidget):
      
     def __init__(self, parent):
         super().__init__(parent=parent)
-        self.player_recorder = PlayerRecorder()
+        self.player_recorder = PlayerRecorder(main_widget=self)
         self.choose_ds_window = ChooseDatasetWindow(parent=self)
         self.recording_window = PlayerRecordingWidget(parent=self)
         self.UI()
@@ -40,7 +40,7 @@ class MainWidget(QWidget):
 
         self.setLayout(layout)
         layout.addWidget(self.choose_ds_window)
-        layout.addWidget(self.player_recorder)
+        layout.addWidget(self.recording_window)
         self.recording_window.hide()
 
         self.setWindowTitle('')
@@ -57,8 +57,9 @@ class MainWidget(QWidget):
         return self.player_recorder.current_recording
 
 
+    def finished_recording(self, next_recording):
+        self.recording_window.update_recording_num(next_recording)
 
-    
 
 def main():
 
@@ -66,7 +67,8 @@ def main():
     font = QFont("Arial", 26)
     a.setFont(font)
     w = MainWindow()
-    w.showMaximized()
+    w.show()
+    #w.showMaximized()
     currentExitCode = a.exec_()
 
 

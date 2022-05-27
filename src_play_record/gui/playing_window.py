@@ -4,10 +4,26 @@
 import sys
 import time
 from PyQt5.QtWidgets import QListWidget, QWidget, QVBoxLayout, QLabel, QPushButton
-from gui.main import MainWidget
+from PyQt5.QtCore import QThread, QRunnable, QThreadPool
+from app.player_recorder import PlayerRecorder
+
+
+class RecorderThread(QRunnable):
+
+    def __init__(self, player_recorder:PlayerRecorder) -> None:
+        super().__init__()
+        self.player_recorder = player_recorder
+
+    def run(self):
+        self.player_recorder.start_playing_loop()
+
+    def start(self):
+        QThreadPool.globalInstance().start(self)
+
+
 
 class PlayerRecordingWidget(QWidget):
-    def __init__(self, parent:MainWidget):
+    def __init__(self, parent:QWidget):
         super().__init__(parent)
 
         self.num_track_label = QLabel()
@@ -34,7 +50,14 @@ class PlayerRecordingWidget(QWidget):
     def _start_recording(self):
         self.start_button.hide()
         self.stop_button.show()
-        self.parent().player_recorder.start_playing_loop()
+        #self.parent().player_recorder.start_playing_loop()
+        self.player = RecorderThread(player_recorder=self.parent().player_recorder)
+        self.player.start()
+        
+        
+
+    def update_recording_num(self, recording_num):
+        self.num_track_label.setText(f"Num Track: {recording_num}")
 
 
     def _stop_recording(self):
