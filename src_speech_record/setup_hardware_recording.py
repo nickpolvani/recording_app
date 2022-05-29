@@ -1,6 +1,5 @@
 import pyaudio 
 import wave
-from win32api import GetSystemMetrics
 
 
 
@@ -75,3 +74,4 @@ def main():
 if __name__ == "__main__":
   #main()
   print_all_devices()
+  #explore_devices("MME")
